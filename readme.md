@@ -3,7 +3,7 @@
 A simple docker-compose builder for the create-react-app that contains a docker-compose file.
 Mostly some ops practice but it might be useful to some.
 
-NOTE: Not responislbe 
+NOTE: Not responsible for damages this may cause to your system. Script uses rm -rf so careful.
 
 ## TL:DR
 
