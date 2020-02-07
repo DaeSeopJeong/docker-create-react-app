@@ -1,10 +1,9 @@
 # DockerReactBootStrap.
 
-A simple docker-compose builder for the create-react-app.
-Mostly some ops practice but it might be useful to some.
+A simple docker-compose builder for the create-react-app that contains a docker-compose file.
+Mostly some ops practice but it might be useful to some. 
 
 ## TL:DR
-
 
 1. Go to build directory.
 2. Run the following command.
@@ -14,6 +13,22 @@ Mostly some ops practice but it might be useful to some.
 ```
 NAME="foo" DIR="../../" ./create.sh
 ```
+
+At this point whatever directory you asked for should have a simple create-react-app with a docker-compose.yml file.
+
+You can cd into that directory and run.
+```
+docker-compose up
+```
+
+If you don't want to do that and have node install, you can do the usual.
+```
+npm install && npm start
+```
+
+
+
+## What thes script does.
 
 1. Creates a docker container.
 2. Runs 'npx create-react-app ${NAME} in the container'
