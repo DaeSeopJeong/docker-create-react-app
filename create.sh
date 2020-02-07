@@ -8,6 +8,8 @@
 # Has rm -rf in the script which i dont' like.
 set +e
 
+SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
 if [[ -z "${NAME}" ]]
 then
   echo "NAME env variable not defined. Name is the name of the react project"
@@ -20,9 +22,27 @@ then
   exit 1;
 fi
 
-cd build
+echo "> Cleaning tmp dir"
+rm -rf /tmp/build
+rm -rf /tmp/docker-compose.yml
+
+echo "> Copying files over"
+cp app/docker-compose.yml /tmp
+mkdir -p /tmp/build
+cp build/docker-compose.yml /tmp/build
+cd /tmp/build
 docker-compose up
-mv ${NAME} ${DIR}
-cp ../app/docker-compose.yml ../${DIR}/${NAME}
-rm -rf ${NAME}
-cd ..
+echo "> BUILD COMPLETE. Moving"
+mv /tmp/build/${NAME} ${SCRIPTPATH}/${DIR}
+mv /tmp/docker-compose.yml ${SCRIPTPATH}/${DIR}/${NAME}
+echo "> Cleaning tmp dir again"
+rm -rf /tmp/build
+rm -rf /tmp/docker-compose.yml
+
+#ls ${DIR}
+#ls ${NAME}
+#mv ${NAME} ../${DIR}
+#echo "> Copying docker compose file"
+#cp ../app/docker-compose.yml ../${DIR}/${NAME}
+#rm -rf ${NAME}
+#cd ..
